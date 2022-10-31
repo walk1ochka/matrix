@@ -139,13 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\ЛР1\ЛР1\ЛР2.cpp" />
+    <ClCompile Include="Figure.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="Logic.cpp" />
     <ClCompile Include="Symbol.cpp" />
     <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="ЛР2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Figure.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="Logic.h" />
     <ClInclude Include="Structs.h" />

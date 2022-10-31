@@ -6,16 +6,17 @@
 		:length(_length), epilepsy(_epilepsy), startX(x) {
 		moveTime = clock() + Utils::getRandom(999);
 	};
-	void Line::drawNext() {
+	 void Line::drawNext() {
 		consoleWH consData = Utils::getConsoleData();
 		if (currentY <= consData.height + length + 1) {
 			if (currentY <= consData.height + 1) {
-				int color = 15;
+				const int white = 7;
+				int color = white;
 				int oldColor = 2;
 				int charCode = Utils::getRandom(32, 127);
 				if (epilepsy)
 				{
-					oldColor = Utils::getRandom(1, 14);
+					oldColor = Utils::getRandom(1, white-1);
 				}
 				Symbol s(startX + ((currentY - 1) % 2), currentY - 1);
 				s.setColor(oldColor);
@@ -33,7 +34,7 @@
 			s.print(' ');
 		}
 		else {
-			ended = true;
+			changeStatus();
 		}
 		currentY++;
 	}

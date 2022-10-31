@@ -5,7 +5,7 @@ public:
 	int x;
 	int y;
 
-	Symbol(int _x, int _y);
+	Symbol(int x, int y);
 	void setColor(int _col, int _bg=0);
 	void print(char charCode);
 private:

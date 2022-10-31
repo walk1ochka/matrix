@@ -31,12 +31,12 @@ using namespace std;
 		}
 		return true;
 	}
-	void Utils::useColor(int color, int background)
-	{
-		HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-		SetConsoleTextAttribute(hStdOut,
-			(WORD)((background << 4) | color));
-	}
+	//void Utils::useColor(int color, int background)
+	//{
+	//	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	//	SetConsoleTextAttribute(hStdOut,
+	//		(WORD)((background << 4) | color));
+	//}
 	int Utils::getRandom(int left, int right) {
 		int l = left, r = right;
 		if (left > right)

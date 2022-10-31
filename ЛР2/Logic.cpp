@@ -6,7 +6,7 @@ using namespace std;
 
 
 Logic::Logic() {
-		Utils::useColor(15, 0);
+		//Utils::useColor(15, 0);
 		hello();
 		data.speed = readInt("Enter the speed of the line");
 		data.length = readInt("Enter the length of the line");
@@ -36,7 +36,7 @@ Logic::Logic() {
 					(*lines[i]).drawNext();
 					(*lines[i]).moveTime += 1000 / data.speed;
 				}
-				if ((*lines[i]).ended)
+				if ((*lines[i]).isEnded())
 				{
 					delete lines[i];
 					lines.erase(lines.begin() + i);
