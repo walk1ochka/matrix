@@ -3,6 +3,7 @@
 #include "Utils.h"
 #include "Symbol.h"
 #include <ctime>
+#include "Structs.h"
 
 Blow::Blow(int x,int y,int maxR, int minR)
 	:Figure(x,y){
@@ -12,7 +13,6 @@ Blow::Blow(int x,int y,int maxR, int minR)
 
 Blow::~Blow()
 {
-	move();
 }
 void Blow::move() {
 	for (int i = -currentRadius; i <= currentRadius; i++)
@@ -23,20 +23,24 @@ void Blow::move() {
 			int charCode = space;
 			int length = abs(i) + abs(j);
 			int newX = x + i, newY = y + j;
-			if ( length == currentRadius)
+			
+			if (!borderTouched(newX,newY))
 			{
-				if (!isEnded())
+				if (length == currentRadius)
 				{
-					charCode = Utils::getRandom(space + 1, 127);
+					if (!isEnded())
+					{
+						charCode = Utils::getRandom(space + 1, 127);
+					}
+					Symbol s(newX, newY);
+					s.setColor(Utils::getRandom(1, 6));
+					s.print(charCode);
 				}
-				Symbol s(newX,newY);
-				s.setColor(Utils::getRandom(1, 6));
-				s.print(charCode);
-			}
-			else if (length < currentRadius) {
-				Symbol s(newX, newY);
-				s.print(space);
-			}
+				else if (length < currentRadius) {
+					Symbol s(newX, newY);
+					s.print(space);
+				}
+			}		
 		}
 	}
 	if (currentRadius >= radius)

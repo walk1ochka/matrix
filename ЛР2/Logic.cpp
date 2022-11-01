@@ -73,6 +73,7 @@ Logic::Logic() {
 				}
 				if ((*blows[i]).isEnded())
 				{
+					(*blows[i]).move();
 					delete blows[i];
 					blows.erase(blows.begin() + i);
 				}

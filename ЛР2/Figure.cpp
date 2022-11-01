@@ -1,8 +1,10 @@
 #include "Figure.h"
 #include "Symbol.h"
+#include "Utils.h"
 
 Figure::Figure(int x, int y, int sp)
 	:x(x),y(y),speed(sp){
+	console = Utils::getConsoleData();
 }
 
 int Figure::getMoveTime(){
@@ -22,6 +24,14 @@ void Figure::moveTimeInc() {
 bool Figure::isEnded() {
 	return ended;
 }
+bool Figure::borderTouched(int x, int y) {
+	if (x>0 && x<console.width && y>0 && y<console.height)
+	{
+		return false;
+	}
+	return true;
+}
+
 Figure::~Figure()
 {
 }

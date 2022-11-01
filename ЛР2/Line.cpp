@@ -6,7 +6,6 @@
 	Line::Line(int x, int y, appData data)
 		:Figure(x,y,data.speed),length(data.length), epilepsy(data.epilepsy), probability(data.probability){
 		moveTime = clock() + Utils::getRandom(999);
-		console = Utils::getConsoleData();
 	};
 	 void Line::move() {
 		if (y <= console.height + length + 1) {

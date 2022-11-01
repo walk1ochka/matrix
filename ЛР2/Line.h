@@ -14,5 +14,5 @@ public:
 private:
 	int  length, prevChar = 32,probability;
 	bool epilepsy,blowing = 0;
-	consoleWH console;
+	
 };
