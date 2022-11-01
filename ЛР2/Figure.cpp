@@ -8,8 +8,8 @@ Figure::Figure(int x, int y, int sp)
 int Figure::getMoveTime(){
 	return moveTime;
 }
-void Figure::changeStatus() {
-	ended = !ended;
+void Figure::changeStatus(bool newStatus) {
+	ended = newStatus;
 }
 void Figure::move() {
 	Symbol s(2,10);

@@ -37,6 +37,7 @@ using namespace std;
 	//	SetConsoleTextAttribute(hStdOut,
 	//		(WORD)((background << 4) | color));
 	//}
+
 	int Utils::getRandom(int left, int right) {
 		int l = left, r = right;
 		if (left > right)
@@ -53,4 +54,14 @@ using namespace std;
 
 	int Utils::getRandom(int right) {
 		return Utils::getRandom(0, right);
+	}
+
+	bool Utils::probabilityCheck(int prob) {
+		if (getRandom(1000) > prob) {
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}

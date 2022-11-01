@@ -8,7 +8,7 @@ public:
 	virtual void move();
 	int getMoveTime();
 	bool isEnded();
-	void changeStatus();
+	void changeStatus(bool newStatus=true);
 	void moveTimeInc();
 private:
 	bool ended = false;

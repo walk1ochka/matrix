@@ -16,3 +16,8 @@ struct consoleWH
 	int width;
 	int height;
 };
+
+struct coords {
+	int x;
+	int y;
+};

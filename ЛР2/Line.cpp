@@ -1,15 +1,16 @@
 #include "Line.h"
 #include <ctime>
 #include "Utils.h"
+#include "Structs.h"
 
-	Line::Line(int _length, bool _epilepsy, int x, int y, int speed)
-		:Figure(x,y,speed),length(_length), epilepsy(_epilepsy){
+	Line::Line(int x, int y, appData data)
+		:Figure(x,y,data.speed),length(data.length), epilepsy(data.epilepsy), probability(data.probability){
 		moveTime = clock() + Utils::getRandom(999);
+		console = Utils::getConsoleData();
 	};
 	 void Line::move() {
-		consoleWH consData = Utils::getConsoleData();
-		if (y <= consData.height + length + 1) {
-			if (y <= consData.height + 1) {
+		if (y <= console.height + length + 1) {
+			if (!borderTouched()) {
 				const int white = 7;
 				int color = white;
 				int oldColor = 2;
@@ -22,7 +23,7 @@
 				s.setColor(oldColor);
 				s.print(prevChar);
 				prevChar = charCode;
-				if (y <= consData.height)
+				if (y <= console.height)
 				{
 					Symbol s(x + (y % 2), y);
 					s.setColor(color);
@@ -38,8 +39,39 @@
 		}
 		y++;
 	}
-	int Line::getLength() {
-		return length;
-		}
+
+	//int Line::getLength() {
+	//	return length;
+	//	}
+
+	 bool Line::checkBlowing() {
+		 if (Utils::probabilityCheck(probability) && !borderTouched())
+		 {
+			 length--;
+			 y--;
+			 if (length <= 0) {
+				 changeStatus();
+			}
+			 return true;
+		 }
+		 return false;
+	 }
+
+	 bool Line::borderTouched() {
+		 if (y > console.height + 1) {
+			 return true;
+		 }
+		 else {
+			 return false;
+		 }
+	 }
+
+	coords Line::getCoords(){
+		coords c;
+		c.x = x;
+		c.y = y;
+		return c;
+	}
+
 	Line::~Line() {
 	}
