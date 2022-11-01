@@ -5,11 +5,12 @@
 
 class Line : public Figure {
 public:
-	Line(int _length, bool _epilepsy, int x);
+	Line(int _length, bool _epilepsy, int x, int y, int speed);
 	int getLength();
 	~Line();
-	void drawNext();
+	void move();
+	
 private:
-	int  length, currentY = 1, startX, prevChar = 32;
+	int  length, prevChar = 32;
 	bool epilepsy;
 };

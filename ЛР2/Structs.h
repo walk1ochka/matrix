@@ -5,6 +5,9 @@ struct appData
 	int speed;
 	int frequency;
 	int length;
+	int probability;
+	int minRadius;
+	int maxRadius;
 	bool epilepsy;
 };
 

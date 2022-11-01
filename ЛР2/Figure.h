@@ -3,15 +3,17 @@
 class Figure
 {
 public:
-	Figure(int sp = 2);
+	Figure(int x, int y, int sp = 2);
 	~Figure();
-	virtual void drawNext();
+	virtual void move();
 	int getMoveTime();
 	bool isEnded();
 	void changeStatus();
-	int moveTime;
+	void moveTimeInc();
 private:
-	int speed;
 	bool ended = false;
+protected:
+	int speed, x, y;
+	int moveTime=0;
 };
 

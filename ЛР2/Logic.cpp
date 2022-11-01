@@ -1,6 +1,7 @@
 #include "Logic.h"
 #include <vector>
 #include <iostream>
+#include "Blow.h"
 
 using namespace std;
 
@@ -8,9 +9,22 @@ using namespace std;
 Logic::Logic() {
 		//Utils::useColor(15, 0);
 		hello();
-		data.speed = readInt("Enter the speed of the line");
-		data.length = readInt("Enter the length of the line");
-		data.frequency = readInt("Enter the lines frequency");
+		data.speed = readInt("Enter the speed of the line",1,30);
+		data.length = readInt("Enter the length of the line",1, 30);
+		data.frequency = readInt("Enter the lines frequency", 1, 30);
+		data.probability = readInt("Enter the probability of blowing", 1, 1000);
+		while (true)
+		{
+			data.minRadius = readInt("Enter the lower radius of blowing", 1, 10);
+			data.maxRadius = readInt("Enter the higher radius of blowing", 1, 10);
+			if (data.minRadius <= data.maxRadius) {
+				break;
+			}
+			else
+			{
+				cout << "lower radius mustn't be over higher!";
+			}
+		}
 		data.epilepsy = readBool("Do you want some epilepsy?");
 	}
 
@@ -24,17 +38,17 @@ Logic::Logic() {
 			{
 				for (size_t i = 0; i < data.frequency; i++)
 				{
-					Line* l = new Line(data.length, data.epilepsy, Utils::getRandom(Utils::getConsoleData().width));
+					Line* l = new Line(data.length, data.epilepsy, Utils::getRandom(Utils::getConsoleData().width),1,data.speed);
 					lines.push_back(l);
 				}
 				prevTime = clock();
 			}
 			for (size_t i = 0; i < lines.size(); i++)
 			{
-				if (clock() >= (*lines[i]).moveTime)
+				if (clock() >= (*lines[i]).getMoveTime())
 				{
-					(*lines[i]).drawNext();
-					(*lines[i]).moveTime += 1000 / data.speed;
+					(*lines[i]).move();
+					(*lines[i]).moveTimeInc();
 				}
 				if ((*lines[i]).isEnded())
 				{
@@ -52,17 +66,17 @@ Logic::Logic() {
 	void  Logic::hello() {
 		cout << "Hello!" << endl << "This is the Matrix app where" << endl << "symbols are falling from the sky like zig-zag!" << endl << endl;
 	}
-	int Logic::readInt(string message) {
+	int Logic::readInt(string message,int lBorder,int rBorder) {
 		while (true)
 		{
 			string str;
-			cout << message << " (Number 1-30): ";
+			cout << message << " (Number "<<lBorder<<'-'<< rBorder<<"): ";
 			cin >> str;
 			if (Utils::isNumber(str))
 			{
-				if (stoi(str) < 1 || stoi(str) > 30)
+				if (stoi(str) < lBorder || stoi(str) > rBorder)
 				{
-					cout << "Wrong range, write number between 1 and 30!" << endl;
+					cout << "Wrong range, write number between " << lBorder <<" and " << rBorder << "!" << endl;
 				}
 				else
 				{

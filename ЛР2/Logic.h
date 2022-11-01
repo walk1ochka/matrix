@@ -13,6 +13,6 @@ public:
 private:
 	appData data;
 	void hello();
-	int readInt(std::string message);
+	int readInt(std::string message, int lBorder, int rBorder);
 	bool readBool(std::string message);
 };

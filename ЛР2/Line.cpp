@@ -2,14 +2,14 @@
 #include <ctime>
 #include "Utils.h"
 
-	Line::Line(int _length, bool _epilepsy, int x)
-		:length(_length), epilepsy(_epilepsy), startX(x) {
+	Line::Line(int _length, bool _epilepsy, int x, int y, int speed)
+		:Figure(x,y,speed),length(_length), epilepsy(_epilepsy){
 		moveTime = clock() + Utils::getRandom(999);
 	};
-	 void Line::drawNext() {
+	 void Line::move() {
 		consoleWH consData = Utils::getConsoleData();
-		if (currentY <= consData.height + length + 1) {
-			if (currentY <= consData.height + 1) {
+		if (y <= consData.height + length + 1) {
+			if (y <= consData.height + 1) {
 				const int white = 7;
 				int color = white;
 				int oldColor = 2;
@@ -18,25 +18,25 @@
 				{
 					oldColor = Utils::getRandom(1, white-1);
 				}
-				Symbol s(startX + ((currentY - 1) % 2), currentY - 1);
+				Symbol s(x + ((y - 1) % 2), y - 1);
 				s.setColor(oldColor);
 				s.print(prevChar);
 				prevChar = charCode;
-				if (currentY <= consData.height)
+				if (y <= consData.height)
 				{
-					Symbol s(startX + (currentY % 2), currentY);
+					Symbol s(x + (y % 2), y);
 					s.setColor(color);
 					s.print(charCode);
 				}
 			}
-			int newY = currentY - length;
-			Symbol s(startX + (newY % 2), newY);
+			int newY = y - length;
+			Symbol s(x + (newY % 2), newY);
 			s.print(' ');
 		}
 		else {
 			changeStatus();
 		}
-		currentY++;
+		y++;
 	}
 	int Line::getLength() {
 		return length;
