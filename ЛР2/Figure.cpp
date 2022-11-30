@@ -32,6 +32,18 @@ bool Figure::borderTouched(int x, int y) {
 	return true;
 }
 
+bool Figure::isLine() {
+	return line;
+}
+
+coords Figure::getCoords() {
+	coords c;
+	c.x = x;
+	c.y = y;
+	return c;
+}
+
+bool Figure::checkBlowing() { return false; }
 Figure::~Figure()
 {
 }

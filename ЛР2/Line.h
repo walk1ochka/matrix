@@ -8,11 +8,10 @@ public:
 	Line(int x, int y, appData data);
 	~Line();
 	void move();
-	coords getCoords();
 	bool checkBlowing();
 	bool borderTouched();
 private:
 	int  length, prevChar = 32,probability;
-	bool epilepsy,blowing = 0;
+	bool epilepsy, blowing = false;
 	
 };

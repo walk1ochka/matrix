@@ -9,7 +9,6 @@ class Logic {
 public:
 	Logic();
 	void start();
-	appData getData();
 private:
 	appData data;
 	void hello();

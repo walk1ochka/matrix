@@ -2,12 +2,13 @@
 #include <vector>
 #include <iostream>
 #include "Blow.h"
+#include "Container.cpp"
+#include "Figure.h"
 
 using namespace std;
 
 
 Logic::Logic() {
-		//Utils::useColor(15, 0);
 		hello();
 		data.speed = readInt("Enter the speed of the line",1,30);
 		data.length = readInt("Enter the length of the line",1, 30);
@@ -29,8 +30,7 @@ Logic::Logic() {
 	}
 
 	void Logic::start() {
-		vector <Line*> lines;
-		vector <Blow*> blows;
+		Container<Figure*> figures;
 		system("cls");
 		int prevTime = clock() - 1000;
 		while (true)
@@ -40,49 +40,40 @@ Logic::Logic() {
 				for (size_t i = 0; i < data.frequency; i++)
 				{
 					Line* l = new Line(Utils::getRandom(Utils::getConsoleData().width),1,data);
-					lines.push_back(l);
+					figures.pushBack(l);
 				}
 				prevTime = clock();
 			}
-			for (size_t i = 0; i < lines.size(); i++)
+			for (size_t i = 0; i < figures.getLength(); i++)
 			{
-				if (clock() >= (*lines[i]).getMoveTime())
+				if (clock() >= figures[i]->getMoveTime())
 				{
-					(*lines[i]).move();
-					(*lines[i]).moveTimeInc();
-					coords XY = (*lines[i]).getCoords();
-					if ((*lines[i]).checkBlowing())
+					figures[i]->move();
+					figures[i]->moveTimeInc();
+					if (figures[i]->isLine())
 					{
-						Blow* b = new Blow(XY.x, XY.y, data.maxRadius, data.maxRadius);
-						blows.push_back(b);
+						if (figures[i]->checkBlowing())
+						{
+							coords XY = (figures[i]->getCoords());
+							Blow* b = new Blow(XY.x, XY.y, data.maxRadius, data.maxRadius);
+							
+							figures.pushBack(b);
+						}
 					}
+					
 				}				
-				if ((*lines[i]).isEnded())
+				if (figures[i]->isEnded())
 				{
-					delete lines[i];
-					lines.erase(lines.begin() + i);
+					if (!figures[i]->isLine())
+					{
+						figures[i]->move();
+					}
+					delete figures[i];
+					figures.erase(figures.begin() + i);
 				}
 				
 			}
-			for (size_t i = 0; i < blows.size(); i++)
-			{
-				if (clock() >= (*blows[i]).getMoveTime())
-				{
-					(*blows[i]).move();
-					(*blows[i]).moveTimeInc();
-				}
-				if ((*blows[i]).isEnded())
-				{
-					(*blows[i]).move();
-					delete blows[i];
-					blows.erase(blows.begin() + i);
-				}
-			}
 		}
-	}
-
-	appData Logic::getData() {
-		return data;
 	}
 
 	void  Logic::hello() {

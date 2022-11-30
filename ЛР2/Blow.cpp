@@ -13,13 +13,15 @@ Blow::Blow(int x,int y,int maxR, int minR)
 
 Blow::~Blow()
 {
+
 }
 void Blow::move() {
+	const int space = 32;
 	for (int i = -currentRadius; i <= currentRadius; i++)
 	{
 		for (int j = -currentRadius; j <= currentRadius; j++)
 		{
-			const int space = 32;
+			
 			int charCode = space;
 			int length = abs(i) + abs(j);
 			int newX = x + i, newY = y + j;
@@ -36,7 +38,7 @@ void Blow::move() {
 					s.setColor(Utils::getRandom(1, 6));
 					s.print(charCode);
 				}
-				else if (length < currentRadius) {
+				else if (length == currentRadius-1) {
 					Symbol s(newX, newY);
 					s.print(space);
 				}
