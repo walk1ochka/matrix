@@ -140,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Blow.cpp" />
-    <ClCompile Include="Container.cpp" />
+    <ClCompile Include="MyVector.cpp" />
     <ClCompile Include="Figure.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="Logic.cpp" />

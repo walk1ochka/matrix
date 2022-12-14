@@ -2,7 +2,7 @@
 #include <vector>
 #include <iostream>
 #include "Blow.h"
-#include "Container.cpp"
+#include "MyVector.cpp"
 #include "Figure.h"
 
 using namespace std;
@@ -30,7 +30,7 @@ Logic::Logic() {
 	}
 
 	void Logic::start() {
-		Container<Figure*> figures;
+		myVector<Figure*> figures;
 		system("cls");
 		int prevTime = clock() - 1000;
 		while (true)

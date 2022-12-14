@@ -1,14 +1,14 @@
 #pragma once
 
-template <typename T> class Container {
+template <typename T> class myVector {
 public:
 
-    Container() {
+    myVector() {
         length = 0;
         allocated = 1;
         data = new T[allocated];
     };
-    Container(int leng) :
+    myVector(int leng) :
         length{ leng }
     {
         if (length > 0)
@@ -48,21 +48,20 @@ public:
     }
 
     void pushBack(const T& value) {
-        reserve();
-        data[length] = value;
-        length++;
+        insert(end(), value);
     }
 
-    void pushStart(const T& value) {
+    void pushFront(const T& value) {
+        insert(begin(), value);
+    }
+    void insert(T* ptr, const T& value) {
+        size_t n = ptr - begin();
         reserve();
-        T* newArr = new T[allocated];
-        for (size_t i = 0; i < length; i++)
+        for (size_t i = length; i >= n + 1; i--)
         {
-            newArr[i + 1] = data[i];
+            data[i] = data[i - 1];
         }
-        newArr[0] = value;
-        delete[] data;
-        data = newArr;
+        data[n] = value;
         length++;
     }
 
@@ -73,14 +72,15 @@ public:
         length = 0;
     }
 
-    void erase(T* index) {
-        size_t n = index - begin();
+    void erase(T* ptr) {
+        size_t n = ptr - begin();
         for (size_t i = n; i < length; i++)
         {
             data[i] = data[i + 1];
         }
         length--;
     }
+
 
 private:
     int length, allocated;
